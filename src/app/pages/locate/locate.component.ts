@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
+import { LocateControl } from "leaflet.locatecontrol";
+import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
 import * as L from 'leaflet';
 
 @Component({
@@ -15,7 +17,18 @@ export class LocateComponent implements OnInit {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-    this.map.locate({ setView: true, maxZoom: 16 });
+
+    this.map = new LocateControl({
+      position: "topright",
+      strings: {
+        title: "Show me where I am, yo!"
+      }
+    })
+      .addTo(this.map);
+
+    this.map.start();
+
+    // this.map.locate({ setView: true, maxZoom: 16 });
 
     this.map.on('locationfound', this.OnLocationFound);
     this.map.on('locationerror', this.OnLocationError);
