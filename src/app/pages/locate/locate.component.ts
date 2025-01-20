@@ -23,8 +23,7 @@ export class LocateComponent implements OnInit {
       strings: {
         title: "Show me where I am, yo!"
       }
-    })
-      .addTo(this.map);
+    }).addTo(this.map);
 
     this.map.start();
 
